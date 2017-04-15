@@ -1,0 +1,112 @@
+1. Java7
+
+
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+        while(t>0)
+            {
+            int n = Integer.parseInt(br.readLine());
+            String s1 = br.readLine();
+            String pat[] = s1.split(" ");
+            String s = br.readLine();
+        Arrays.sort(pat,new java.util.Comparator<String>() {
+    public int compare(String s1, String s2) {
+        return s2.length() - s1.length();
+    }
+        });
+        int patl = pat.length;
+       for(int i=0;i<patl;i++){
+            s=s.replaceAll(pat[i], (i + " "));
+        }       
+        String part[] = s.split(" ");
+        String f = "";
+            int z=1;
+        for(int j=0;j<part.length;j++)
+            {
+                try{
+                    int k = Integer.parseInt(part[j]);
+                  f = f+ pat[k] + " ";
+                }catch(Exception e)
+                    {
+                    System.out.println("WRONG PASSWORD");
+                    z=0;
+                    break;
+                  
+                }
+        }
+            if(z!=0)
+        System.out.println(f);
+        t--;
+        }
+           } 
+    
+}
+
+
+
+2.Python 2
+
+
+for _ in range(input()):
+    n = input()
+    arr = map(int,raw_input().split())
+    max_sum = -999999999
+    c_sum = 0
+    sum1 = 0
+    for i in range(n):
+        sum1+=arr[i]
+        if arr[i]>0:
+            c_sum += arr[i]
+        if sum1>max_sum:
+            max_sum = sum1
+        if sum1<0:
+            sum1 = 0
+    if c_sum == 0:
+        c_sum = max(arr)
+    print max_sum,c_sum
+	
+	
+	
+	
+3. C++
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int c[52];
+int numCoins;
+long long table[52][252];
+bool calculated[52][252];
+long long solve(int i, int make)
+{
+    if(make<0) return 0;
+    if(make==0)return 1;
+    if(i > numCoins) return 0;
+    if(calculated[i][make] == false){ //eliminating overlap
+        table[i][make] = solve(i, make - c[i]) + solve(i+1, make);
+        calculated[i][make] = true;
+    }
+    return table[i][make];
+}
+int main(){
+
+    int make;
+    cin>>make>>numCoins;
+    for(int i=1;i<=numCoins;i++){
+        cin>>c[i];
+    }
+    cout<<solve(1, make)<<endl;
+    return 0;
+}
