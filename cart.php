@@ -214,12 +214,12 @@ if(!isset($_SESSION['name']))
                             </tr>
                         </thead>
                        <?php echo '<tbody>';
-                            $result ="select Dish,Price,Quantity,total from cart where user ='{$_SESSION["user"]}'  ";
+                            $result ="select id,Dish,Price,Quantity,total from cart where user ='{$_SESSION["user"]}'  ";
                 $res = mysqli_query($conn,$result);
                 $total=0;
                 while ($row =  mysqli_fetch_array($res) ){
                     echo'<tr class="cart_item">';
-                                echo'<td class="remove"><a id="#delete "href="remove.php">X</a></td>';
+                                echo'<td class="remove">';echo '<a id="#delete" href="remove.php?id='.$row['id'].'">X</a></td>';
                                 echo'<td class="item-title">';echo $row['Dish']; echo'</td>';
                                 echo'<td class="item-price">'; echo $row['Price']; echo'</td>';
                                 echo '<td class="item-qty">'; echo $row['Quantity']; echo '</td>';

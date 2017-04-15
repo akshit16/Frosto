@@ -1,8 +1,9 @@
 <?php
 session_start();
 include_once("Connection.php");
-$sql = "DELETE FROM cart
-WHERE user='{$_SESSION["user"]}'";
+ $id = $_GET["id"];
+ $sql = "DELETE FROM cart
+WHERE id='$id'";
 $retvalI = mysqli_query( $conn, $sql );
 if($retvalI){
 //echo "Deleted.";
